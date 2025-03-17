@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор палива</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Калькулятор палива</h1>
+        <section id="task1">
+            <h2>Розрахунок складу палива</h2>
+            <button onclick="calculateFuelComposition()">Обчислити</button>
+            <pre id="result1"></pre>
+        </section>
+
+        <script>
+            function calculateFuelComposition() {
+                let H_P = 3.7, C_P = 50.6, S_P = 4.00, N_P = 1.10, O_P = 8.00, W_P = 13.0, A_P = 19.6;
+                let totalComposition = H_P + C_P + S_P + N_P + O_P + W_P + A_P;
+                let KRG = 3.04;
+                let result = `ПЕРЕВІРКА: ${totalComposition.toFixed(2)} = 100%\n` +
+                             `НГ = ${(H_P * KRG).toFixed(2)}\n` +
+                             `СГ = ${(C_P * KRG).toFixed(2)}\n` +
+                             `SГ = ${(S_P * KRG).toFixed(2)}\n` +
+                             `NГ = ${(N_P * KRG).toFixed(2)}\n` +
+                             `ОГ = ${(O_P * KRG).toFixed(2)}`;
+                document.getElementById("result1").innerText = result;
+            }
+        </script>
+
+        <section id="task2">
+            <h2>Розрахунок елементарного складу мазуту</h2>
+            <label>Вуглець (%): <input type="number" id="carbon"></label>
+            <label>Водень (%): <input type="number" id="hydrogen"></label>
+            <label>Кисень (%): <input type="number" id="oxygen"></label>
+            <label>Сірка (%): <input type="number" id="sulfur"></label>
+            <label>Нижча теплота згоряння (МДж/кг): <input type="number" id="lowerHeatingValue"></label>
+            <label>Вологість робочої маси (%): <input type="number" id="moistureContent"></label>
+            <label>Зольність сухої маси (%): <input type="number" id="ashContent"></label>
+            <label>Вміст ванадію (мг/кг): <input type="number" id="vanadium"></label>
+            <button onclick="calculateFuelBurning()">Обчислити</button>
+            <pre id="result2"></pre>
+        </section>
+
+        <script>
+            function calculateFuelBurning() {
+                let carbon = parseFloat(document.getElementById("carbon").value);
+                let hydrogen = parseFloat(document.getElementById("hydrogen").value);
+                let oxygen = parseFloat(document.getElementById("oxygen").value);
+                let sulfur = parseFloat(document.getElementById("sulfur").value);
+                let lowerHeatingValue = parseFloat(document.getElementById("lowerHeatingValue").value);
+                let moistureContent = parseFloat(document.getElementById("moistureContent").value);
+                let ashContent = parseFloat(document.getElementById("ashContent").value);
+                let vanadium = parseFloat(document.getElementById("vanadium").value);
+                
+                let dryMass = 100 - moistureContent - ashContent;
+                let totalMass = dryMass - ashContent;
+                
+                let adjustedCarbon = (carbon * (100 - moistureContent) / 100).toFixed(2);
+                let adjustedHydrogen = (hydrogen * (100 - moistureContent) / 100).toFixed(2);
+                let adjustedOxygen = (oxygen * (100 - moistureContent) / 100).toFixed(2);
+                let adjustedSulfur = (sulfur * (100 - moistureContent) / 100).toFixed(2);
+                let adjustedHeatingValue = (lowerHeatingValue * (100 - moistureContent) / 100).toFixed(2);
+                let adjustedVanadium = (vanadium * (100 - moistureContent) / 100).toFixed(2);
+                
+                let result = `Розрахунок на робочу масу мазуту:\n` +
+                             `Вуглець: ${adjustedCarbon}%\n` +
+                             `Водень: ${adjustedHydrogen}%\n` +
+                             `Кисень: ${adjustedOxygen}%\n` +
+                             `Сірка: ${adjustedSulfur}%\n` +
+                             `Нижча теплота згоряння: ${adjustedHeatingValue} МДж/кг\n` +
+                             `Вміст ванадію: ${adjustedVanadium} мг/кг`;
+                document.getElementById("result2").innerText = result;
+            }
+        </script>
+    </div>
+</body>
+</html>

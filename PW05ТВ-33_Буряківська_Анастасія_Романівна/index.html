@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор надійності та збитків</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Калькулятор надійності та збитків</h1>
+
+    <section>
+        <h2>1. Порівняння надійності систем електропередачі</h2>
+        <div class="input-group">
+            <label>Частоти відмов елементів одноколової системи (через кому):</label>
+            <input type="text" id="failuresSingle" placeholder="0.01, 0.07, 0.015, 0.02, 0.03">
+        </div>
+        <div class="input-group">
+            <label>Середній час відновлення елементів (год) (через кому):</label>
+            <input type="text" id="recoveryTimes" placeholder="30, 10, 100, 15, 2">
+        </div>
+        <div class="input-group">
+            <label>Максимальний час планового простою (год):</label>
+            <input type="number" id="tMax" value="43">
+        </div>
+        <div class="input-group">
+            <label>Частота відмов секційного вимикача:</label>
+            <input type="number" id="omegaSwitch" value="0.02">
+        </div>
+        <button onclick="calculateReliability()">Розрахувати надійність</button>
+        <div id="reliabilityResult"></div>
+    </section>
+
+    <section>
+        <h2>2. Розрахунок збитків від перерв електропостачання</h2>
+        <div class="input-group">
+            <label>Збитки при аварійних перервах (грн/кВт·год):</label>
+            <input type="number" id="zAvar" value="23.6">
+        </div>
+        <div class="input-group">
+            <label>Збитки при планових перервах (грн/кВт·год):</label>
+            <input type="number" id="zPlan" value="17.6">
+        </div>
+        <div class="input-group">
+            <label>Частота аварій (1/рік):</label>
+            <input type="number" id="omegaAvar" value="0.01">
+        </div>
+        <div class="input-group">
+            <label>Середній час відновлення (року):</label>
+            <input type="number" id="tRecovery" value="45e-3">
+        </div>
+        <div class="input-group">
+            <label>Потужність споживача (кВт):</label>
+            <input type="number" id="power" value="5120">
+        </div>
+        <div class="input-group">
+            <label>Час роботи (год/рік):</label>
+            <input type="number" id="time" value="6451">
+        </div>
+        <div class="input-group">
+            <label>Коефіцієнт планового простою:</label>
+            <input type="number" id="kPlan" value="4e-3">
+        </div>
+        <button onclick="calculateLosses()">Розрахувати збитки</button>
+        <div id="lossesResult"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

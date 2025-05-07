@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Калькулятор електричних навантажень</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Калькулятор електричних навантажень</h1>
+    <form id="loadForm">
+      <label for="P">Номінальна потужність (Pн), кВт:</label>
+      <input type="number" id="P" value="20" required>
+
+      <label for="kz">Коефіцієнт використання (Kв):</label>
+      <input type="number" id="kz" step="0.01" value="0.21" required>
+
+      <label for="tgf">Коефіцієнт реактивної потужності (tgφ):</label>
+      <input type="number" id="tgf" step="0.01" value="1.55" required>
+
+      <label for="n">Кількість однакових цехів:</label>
+      <input type="number" id="n" value="3" required>
+
+      <button type="submit">Розрахувати</button>
+    </form>
+
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
